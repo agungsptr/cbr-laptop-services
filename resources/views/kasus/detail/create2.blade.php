@@ -5,7 +5,7 @@ Kasus
 @endsection
 
 @section('title-card')
-Tambah Kasus
+Masukkan Bobot
 @endsection
 
 @section('menu-kasus')
@@ -52,6 +52,8 @@ active
                                 <option value="1">Sangat Rendah</option>
                             </select>
                         </td>
+
+                        <input type="hidden" name="type" value="{{$type}}">
                         <input type="hidden" name="fiturs[]" value="{{$fitur->id}}">
                     </tr>
                     @endforeach

@@ -16,7 +16,6 @@ active
 active
 @endsection
 
-
 @section('content')
 @if (session('status'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -67,13 +66,13 @@ active
                 </tr>
             </thead>
             <tbody>
-            @foreach ($detail_fitur as $df)
+            @foreach ($detail_kasus as $dk)
                 <tr>
-                    <td>{{$df->Fitur()->nama_fitur}}</td>
-                    <td>{{$df->bobot}}</td>
+                    <td>{{$dk->Fitur()->nama_fitur}}</td>
+                    <td>{{$dk->Bobot()}}</td>
                     <td>
-                        <a href="{{route('fitur.edit', ['fitur' => $df->fitur_id])}}" class="btn btn-warning btn-sm mr-2">Edit</a>
-                        <button type="button" class="btn btn-danger btn-sm btn-delete" data-remote="{{route('fitur.destroy', ['fitur' => $df->fitur_id])}}">Delete</button>
+                    <button type="button" class="btn btn-warning btn-sm mr-2 btn-edit" data-remote="{{route('kasus.detail.update', ['kasus_detail'=>$dk->id])}}">Edit</button>
+                        <button type="button" class="btn btn-danger btn-sm btn-delete" data-remote="{{route('kasus.detail.destroy', ['kasus_detail' => $dk->id])}}">Delete</button>
                     </td>
                 </tr>
             @endforeach
@@ -81,7 +80,7 @@ active
         </table>
     </div>
 </div>
-<a href="{{route('fitur.create')}}" id="add_fitur" hidden></a>
+<a href="{{route('kasus.detail.create', ['kasus_detail'=>$kasus->id])}}" id="add_fitur" hidden></a>
 @endsection
 
 @section('modal')
@@ -98,10 +97,42 @@ active
             <div class="modal-body" id="modal-body"></div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <form action="" id="form-delete" class="form-inline" method="POST">
+                <form action="" id="form-delete" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger" id="form-btn_delete">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Bobot</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <form action="" id="form-edit" class="form-inline" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <select name="bobot" class="form-control" require style="width: 100%">
+                        <option value="">Pilih</option>
+                        <option value="5">Sangat Tinggi</option>
+                        <option value="4">Tinggi</option>
+                        <option value="3">Sedang</option>
+                        <option value="2">Rendah</option>
+                        <option value="1">Sangat Rendah</option>
+                    </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-warning" id="form-btn_edit">Simpan</button>
                 </form>
             </div>
         </div>
@@ -124,7 +155,7 @@ active
             ]
         });
 
-        $('#table_id tbody').on('click', 'button', function () {
+        $('#table_id tbody').on('click', '.btn-delete', function () {
             var url = $(this).data('remote');
             $('#modal-delete').modal('show');
             $('#form-delete').attr('action', url);
@@ -132,6 +163,12 @@ active
             var tr = $(this).closest('tr');
             var row = table.row(tr).data();
             document.getElementById('modal-body').innerHTML = 'Apakah anda yakin menghapus kasus <strong>' + row[0]+ '</strong> ?';
+        });
+
+        $('#table_id tbody').on('click', '.btn-edit', function () {
+            var url = $(this).data('remote');
+            $('#modal-edit').modal('show');
+            $('#form-edit').attr('action', url);
         });
     });
 </script>

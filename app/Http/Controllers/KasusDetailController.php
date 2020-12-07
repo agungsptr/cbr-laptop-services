@@ -13,6 +13,15 @@ class KasusDetailController extends Controller
     {
         // $this->middleware('auth');
     }
+
+    public function create($id)
+    {
+        $kasus = Kasus::findOrFail($id);
+        return view('kasus.detail.create1', [
+            'kasus_id'=>$id,
+            'type'=>'add'
+        ]);
+    }
     
     public function store1(Request $request)
     {
@@ -26,6 +35,7 @@ class KasusDetailController extends Controller
                 'checks.required' => 'Fitur harus dipilih minimal 1',
             ]
         );
+        $type = $request->get('type');
 
         $kasus_id = $request->get('kasus_id');
         $kasus = Kasus::findOrFail($kasus_id);
@@ -40,7 +50,8 @@ class KasusDetailController extends Controller
 
         return view('kasus.detail.create2', [
             'fiturs' => $fiturs,
-            'kasus_id' => $kasus_id
+            'kasus_id' => $kasus_id,
+            'type'=>$type
         ]);
     }
 
@@ -58,6 +69,7 @@ class KasusDetailController extends Controller
                 'bobots.required' => 'Bobots harus ada minimal 1',
             ]
         );
+        $type = $request->get('type');
 
         $kasus_id = $request->get('kasus_id');
         $kasus = Kasus::findOrFail($kasus_id);
@@ -75,7 +87,11 @@ class KasusDetailController extends Controller
             $dk->save();
         }
 
-        return redirect()->route('kasus.create')->with('status', "Kasus \"$kasus->nama_kasus\" berhasil ditambah");
+        if ($type == 'add') {
+            return redirect()->route('kasus.show', ['kasus'=>$kasus_id])->with('status', "Fitur berhasil ditambah");
+        } else {
+            return redirect()->route('kasus.create')->with('status', "Kasus \"$kasus->nama_kasus\" berhasil ditambah");
+        }
     }
 
     public function show($id)
@@ -90,11 +106,19 @@ class KasusDetailController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $dk = DetailKasus::findOrFail($id);
+        $dk->bobot = $request->get('bobot');
+        $dk->save();
+        return redirect()->route('kasus.show', ['kasus'=>$dk->kasus_id])->with('status', "Bobot berhasil diedit");
     }
 
     public function destroy($id)
     {
-        //
+        $dk = DetailKasus::findOrFail($id);
+        $fitur = $dk->Fitur()->nama_fitur;
+        $kasus_id = $dk->kasus_id;
+        $dk->delete();
+
+        return redirect()->route('kasus.show', ['kasus'=>$kasus_id])->with('status', "Fitur $fitur berhasil dihapus");
     }
 }

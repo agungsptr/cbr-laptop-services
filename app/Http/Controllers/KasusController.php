@@ -42,7 +42,8 @@ class KasusController extends Controller
         $nama_kasus = $request->get('nama_kasus');
 
         return view('kasus.detail.create1', [
-            'kasus_id'=>$kasus->id
+            'kasus_id'=>$kasus->id,
+            'type'=>null
         ]);
     }
 
@@ -53,7 +54,7 @@ class KasusController extends Controller
 
         return view('kasus.view', [
             'kasus'=>$kasus,
-            'detail_fitur'=>$detail_kasus
+            'detail_kasus'=>$detail_kasus
         ]);
     }
 

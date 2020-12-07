@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/', function () {
+    return redirect()->route('kasus.index');
+});
+
 Auth::routes();
 
 // disable route '/register'
@@ -25,12 +29,13 @@ Route::group(['prefix' => 'getdata'], function () {
     Route::get('fitur-cb', 'DataTableController@getFiturCheckbox')->name('getdata.fitur.cb');
 });
 
+
 // app kasus
 Route::group(['prefix' => 'kasus'], function () {
     Route::get('/', 'KasusController@index')->name('kasus.index');                  
-    Route::get('/{kasus}', 'KasusController@show')->name('kasus.show');                  
     Route::get('create', 'KasusController@create')->name('kasus.create');
     Route::post('/', 'KasusController@store')->name('kasus.store');
+    Route::get('{kasus}', 'KasusController@show')->name('kasus.show');                  
     Route::get('{kasus}/edit', 'KasusController@edit')->name('kasus.edit');
     Route::put('{kasus}', 'KasusController@update')->name('kasus.update');
     Route::delete('{kasus}', 'KasusController@destroy')->name('kasus.destroy');
@@ -48,10 +53,10 @@ Route::group(['prefix' => 'fitur'], function () {
 
 // app kasus detail
 Route::group(['prefix' => 'kasus/detail'], function () {
+    Route::get('create/{kasus_detail}', 'KasusDetailController@create')->name('kasus.detail.create');
     Route::post('store/1', 'KasusDetailController@store1')->name('kasus.detail.store1');
     Route::post('store/2', 'KasusDetailController@store2')->name('kasus.detail.store2');
-    Route::get('{kasus_detail}/edit', 'KasusDetailController@edit')->name('kasus.detail.edit');
-    Route::put('{kasus_detail}', 'KasusDetailController@update')->name('kasus.detail.update');
     Route::delete('{kasus_detail}', 'KasusDetailController@destroy')->name('kasus.detail.destroy');
+    Route::put('{kasus_detail}', 'KasusDetailController@update')->name('kasus.detail.update');
 });
 

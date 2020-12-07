@@ -5,7 +5,7 @@ Kasus
 @endsection
 
 @section('title-card')
-Tambah Kasus
+Pilih Fitur
 @endsection
 
 @section('menu-kasus')
@@ -40,6 +40,7 @@ active
                 </thead>
             </table>
 
+            <input type="hidden" name="type" value="{{$type}}">
             <input type="hidden" name="kasus_id" value="{{$kasus_id}}">
             <button type="submit" class="btn btn-primary btn-md float-right mt-2">Next</button>
         </form>
