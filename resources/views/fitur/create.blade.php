@@ -32,6 +32,17 @@ active
         <form action="{{ route('fitur.store') }}" method="POST">
             @csrf
             <div class="form-group">
+                <label for="">Kode Fitur</label>
+                <input name="kode_fitur" type="text" class=" form-control {{$errors->first('kode_fitur') ? 'is-invalid':''}}"
+                    require value="{{old('kode_fitur')}}">
+                @error('kode_fitur')
+                <div class="invalid-feedback">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
+
+            <div class="form-group">
                 <label for="">Fitur</label>
                 <textarea name="nama_fitur" id="" cols="30" rows="5" class=" form-control {{$errors->first('nama_fitur') ? 'is-invalid':''}}"
                     require>{{old('nama_fitur')}}</textarea>
@@ -42,7 +53,6 @@ active
                 @enderror
             </div>
 
-            
             <button type="submit" class="btn btn-primary btn-md float-right">Simpan</button>
         </form>
     </div>

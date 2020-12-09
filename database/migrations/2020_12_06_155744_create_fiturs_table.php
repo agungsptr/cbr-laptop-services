@@ -15,6 +15,7 @@ class CreateFitursTable extends Migration
     {
         Schema::create('fitur', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('kode_fitur')->unique();
             $table->text('nama_fitur');
             $table->timestamps();
         });

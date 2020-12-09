@@ -16,10 +16,15 @@ class CreateDetailKasusesTable extends Migration
         Schema::create('detail_kasus', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('bobot');
+
+            //relasi tabel kasus
             $table->bigInteger('kasus_id')->unsigned();
             $table->foreign('kasus_id')->references('id')->on('kasus');
+
+            //relasi tabel fitur
             $table->bigInteger('fitur_id')->unsigned();
             $table->foreign('fitur_id')->references('id')->on('fitur');
+
             $table->timestamps();
         });
     }

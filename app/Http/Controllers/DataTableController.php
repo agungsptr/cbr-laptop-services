@@ -6,8 +6,23 @@ use Illuminate\Http\Request;
 use App\Kasus;
 use App\Fitur;
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Ini DataTable Controller fungsinya adalah untuk menyediakan data kayak endpoint Web Service
+| datanya berupa json yang nantinya dibaca oleh datatable dan ditampilkan dalam bentuk tabel
+| getKasus() : untuk mengambil data basis kasus
+| getFitur() : untuk mengambil data basis fitur/gejala
+| getFiturCheckbox() : untuk mengambil data basis fitur yang akan digunakan saat input bobot di kasus, 
+|   bedanya dengan getFitur() fungsi ini menyediakan option checkbox
+|
+*/
 class DataTableController extends Controller
 {
+    // constructor ini fungsi untuk menerapkan authentikasi sebelum dapat mengakses fungsi getFitur(),
+    // getKasus(), dan getFiturCheckbox() melalui endpoint.
     public function __construct()
     {
         // $this->middleware('auth');

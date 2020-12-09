@@ -41,7 +41,8 @@ active
         <table class="table table-striped table-bordered table-hover" style="width:100%" id="table_id">
             <thead>
                 <tr>
-                    <th style="width: 80%">Nama Fitur</th>
+                    <th style="width: 10%">Kode Fitur</th>
+                    <th style="width: 70%">Nama Fitur</th>
                     <th style="width: 20%">Action</th>
                 </tr>
             </thead>
@@ -83,6 +84,7 @@ active
             serverside:true,
             ajax:"{{ route('getdata.fitur') }}",
             columns:[
+                {data: 'kode_fitur'},
                 {data: 'nama_fitur'},
                 {data: 'aksi', sortable:false},
             ],

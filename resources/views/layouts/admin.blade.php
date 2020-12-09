@@ -95,11 +95,11 @@
                         <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
 
                         <!-- <li class="nav-header">CBR</li> -->
-                        <li class="nav-item has-treeview menu-open mb-4">
+                        <li class="nav-item has-treeview menu-open mb-2">
                             <a href="#" class="nav-link @yield('menu-kasus')">
-                                <i class="nav-icon far fa-folder"></i>
+                                <i class="nav-icon fas fa-laptop-medical"></i>
                                 <p>
-                                    Kasus
+                                    Basis Kasus
                                     <i class="right fa fa-angle-left"></i>
                                 </p>
                             </a>
@@ -108,7 +108,7 @@
                                     <a href="{{route('kasus.index')}}"
                                         class="nav-link @yield('menu-kasus-daftar')">
                                         <i class="fas fa-list nav-icon"></i>
-                                        <p>Daftar Kasus</p>
+                                        <p>Daftar Basis Kasus</p>
                                     </a>
                                 </li>
                             </ul>
@@ -117,15 +117,15 @@
                                     <a href="{{route('kasus.create')}}"
                                         class="nav-link @yield('menu-kasus-tambah')">
                                         <i class="fas fa-plus nav-icon"></i>
-                                        <p>Tambah Kasus</p>
+                                        <p>Tambah</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
 
-                        <li class="nav-item has-treeview menu-open mb-4">
+                        <li class="nav-item has-treeview menu-open mb-2">
                             <a href="#" class="nav-link @yield('menu-fitur')">
-                                <i class="nav-icon far fa-folder"></i>
+                                <i class="nav-icon far fa-check-square"></i>
                                 <p>
                                     Fitur
                                     <i class="right fa fa-angle-left"></i>
@@ -145,7 +145,7 @@
                                     <a href="{{route('fitur.create')}}"
                                         class="nav-link @yield('menu-fitur-tambah')">
                                         <i class="fas fa-plus nav-icon"></i>
-                                        <p>Tambah Fitur</p>
+                                        <p>Tambah</p>
                                     </a>
                                 </li>
                             </ul>
